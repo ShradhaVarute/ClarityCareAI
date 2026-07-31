@@ -1,0 +1,22 @@
+# Python
+__pycache__/
+*.pyc
+venv/
+.env
+
+# Node
+node_modules/
+dist/
+.vite/
+
+# Datasets & models (usually too large / regenerable)
+datasets/*.csv
+ml_models/*.pkl
+ml_models/*.joblib
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
