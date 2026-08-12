@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 function PredictionForm({ fields, onSubmit }) {
   const [values, setValues] = useState(
