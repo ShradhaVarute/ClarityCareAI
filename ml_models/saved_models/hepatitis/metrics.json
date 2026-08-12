@@ -1,0 +1,10 @@
+{
+  "accuracy": 0.9375,
+  "precision": 0.9285714285714286,
+  "recall": 1.0,
+  "f1_score": 0.9629629629629629,
+  "roc_auc": 0.9487179487179488,
+  "threshold_used": 0.5,
+  "n_train": 64,
+  "n_test": 16
+}
