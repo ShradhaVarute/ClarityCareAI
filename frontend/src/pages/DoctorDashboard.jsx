@@ -1,15 +1,14 @@
 import { useState, useEffect } from "react";
-import { useAuth } from "../context/AuthContext";
-import { useNavigate } from "react-router-dom";
 import apiClient from "../api/client";
+import DashboardLayout from "../components/DashboardLayout";
+import { useNavigate } from "react-router-dom";
 
 function DoctorDashboard() {
-  const { logout } = useAuth();
-  const navigate = useNavigate();
   const [patients, setPatients] = useState([]);
   const [selectedPatient, setSelectedPatient] = useState(null);
   const [history, setHistory] = useState([]);
   const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     apiClient
@@ -29,61 +28,67 @@ function DoctorDashboard() {
     }
   };
 
-  const handleLogout = () => {
-    logout();
-    navigate("/login");
-  };
-
   return (
-    <div className="min-h-screen bg-slate-100 p-8">
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-slate-800">Doctor Dashboard</h1>
-        <button onClick={handleLogout} className="bg-red-600 text-white px-4 py-2 rounded">
-          Logout
-        </button>
-      </div>
+    <DashboardLayout title="Doctor Dashboard">
+      {error && <p className="text-coral text-sm mb-4 bg-coral/10 px-3 py-2 rounded">{error}</p>}
 
-      {error && <p className="text-red-600 mb-4">{error}</p>}
-
-      <div className="grid grid-cols-3 gap-6">
-        <div className="bg-white p-4 rounded-lg shadow-md">
-          <h2 className="font-semibold text-slate-800 mb-3">Patients</h2>
-          <ul className="space-y-2">
+      <div className="grid lg:grid-cols-3 gap-6">
+        <div className="bg-white border border-stone/15 rounded-lg p-6">
+          <h2 className="font-display text-lg text-ink mb-4">Patients</h2>
+          <ul className="space-y-1">
             {patients.map((p) => (
               <li key={p.id}>
                 <button
                   onClick={() => handleSelectPatient(p)}
-                  className={`w-full text-left px-3 py-2 rounded ${
-                    selectedPatient?.id === p.id ? "bg-slate-800 text-white" : "bg-slate-100"
-                  }`}
+                  className={`w-full text-left px-3 py-2.5 rounded-md text-sm transition-colors ${selectedPatient?.id === p.id
+                      ? "bg-deep text-paper"
+                      : "text-ink hover:bg-paper"
+                    }`}
                 >
                   {p.full_name}
                 </button>
               </li>
             ))}
+            {patients.length === 0 && (
+              <p className="text-sm text-stone">No patients yet.</p>
+            )}
           </ul>
         </div>
 
-        <div className="col-span-2 bg-white p-4 rounded-lg shadow-md">
-          <h2 className="font-semibold text-slate-800 mb-3">
+        <div className="lg:col-span-2 bg-white border border-stone/15 rounded-lg p-6">
+          <h2 className="font-display text-lg text-ink mb-4">
             {selectedPatient ? `${selectedPatient.full_name}'s History` : "Select a patient"}
           </h2>
+
+          {!selectedPatient && (
+            <p className="text-sm text-stone">Choose a patient from the list to view their assessment history.</p>
+          )}
+
           <div className="space-y-3">
             {history.map((pred) => (
-              <div key={pred.id} className="border rounded p-3">
-                <p className="font-medium text-slate-800">
-                  {pred.predicted_disease} — confidence {(Number(pred.confidence_score) * 100).toFixed(1)}%
+              <div
+                key={pred.id}
+                onClick={() => navigate(`/doctor/predictions/${pred.id}`)}
+                className="border border-stone/10 rounded-md p-4 cursor-pointer hover:bg-paper transition-colors"
+              >
+                <div className="flex justify-between items-center mb-1">
+                  <p className="text-sm text-ink capitalize">{pred.predicted_disease.replace("_", " ")}</p>
+                  <span className="font-mono text-xs text-teal">
+                    {(Number(pred.confidence_score) * 100).toFixed(0)}%
+                  </span>
+                </div>
+                <p className="font-mono text-xs text-stone">
+                  {new Date(pred.created_at).toLocaleString()}
                 </p>
-                <p className="text-xs text-slate-500">{new Date(pred.created_at).toLocaleString()}</p>
               </div>
             ))}
             {selectedPatient && history.length === 0 && (
-              <p className="text-slate-500 text-sm">No predictions yet for this patient.</p>
+              <p className="text-sm text-stone">No predictions yet for this patient.</p>
             )}
           </div>
         </div>
       </div>
-    </div>
+    </DashboardLayout>
   );
 }
 

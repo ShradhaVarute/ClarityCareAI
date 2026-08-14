@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "Alkphos",
+    "importance": 0.1493408740771776
+  },
+  {
+    "feature": "Sgot",
+    "importance": 0.13787628462325904
+  },
+  {
+    "feature": "Age",
+    "importance": 0.13688424738766009
+  },
+  {
+    "feature": "Sgpt",
+    "importance": 0.12028874938855572
+  },
+  {
+    "feature": "TB",
+    "importance": 0.09624247100419597
+  },
+  {
+    "feature": "ALB",
+    "importance": 0.0951301110596271
+  },
+  {
+    "feature": "TP",
+    "importance": 0.0870696029615983
+  },
+  {
+    "feature": "A/G Ratio",
+    "importance": 0.08003893316407486
+  },
+  {
+    "feature": "DB",
+    "importance": 0.07800732677403589
+  },
+  {
+    "feature": "Gender_Male",
+    "importance": 0.019121399559815455
+  }
+]

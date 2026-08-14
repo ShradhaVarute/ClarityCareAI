@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "PPE",
+    "importance": 0.14913005606548774
+  },
+  {
+    "feature": "spread1",
+    "importance": 0.10715091983004293
+  },
+  {
+    "feature": "MDVP:Fo",
+    "importance": 0.06232135512301483
+  },
+  {
+    "feature": "NHR",
+    "importance": 0.05733493449443767
+  },
+  {
+    "feature": "Jitter:DDP",
+    "importance": 0.056134027528708656
+  },
+  {
+    "feature": "MDVP:Fhi",
+    "importance": 0.05338618117373028
+  },
+  {
+    "feature": "MDVP:Flo",
+    "importance": 0.05209797251262564
+  },
+  {
+    "feature": "MDVP:RAP",
+    "importance": 0.047577850029697374
+  },
+  {
+    "feature": "spread2",
+    "importance": 0.04056517532951293
+  },
+  {
+    "feature": "Shimmer:APQ5",
+    "importance": 0.03912608054256931
+  }
+]

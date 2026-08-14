@@ -25,27 +25,29 @@ def run_prediction(disease_name: str, input_features: dict) -> dict:
     if missing:
         raise ValueError(f"Missing required features: {missing}")
 
-    
     ordered_values = pd.DataFrame([[input_features[f] for f in feature_names]], columns=feature_names)
-
     scaled = artifacts["scaler"].transform(ordered_values)
 
-    proba = artifacts["model"].predict_proba(scaled)[0][1]
-    prediction = int(proba >= 0.5)  # per-disease threshold tuning can be layered in later
+    raw_proba = artifacts["model"].predict_proba(scaled)[0][1]
 
     shap_values = artifacts["explainer"].shap_values(scaled)
-
     if isinstance(shap_values, list):
-        # Older SHAP versions: list of arrays, one per class
         values_for_positive_class = np.array(shap_values[1][0]).flatten()
     elif shap_values.ndim == 3:
-        # Newer SHAP versions: shape (n_samples, n_features, n_classes)
         values_for_positive_class = shap_values[0, :, 1]
     else:
-        # Shape (n_samples, n_features) — already single-class
         values_for_positive_class = shap_values[0]
-
     values_for_positive_class = np.asarray(values_for_positive_class).flatten()
+
+    if disease_name == "breast_cancer":
+        # sklearn encodes class 1 = benign here — invert everything so
+        # "1" consistently means "condition present" across all diseases
+        prediction = int(raw_proba < 0.5)
+        confidence = 1 - raw_proba
+        values_for_positive_class = -values_for_positive_class
+    else:
+        prediction = int(raw_proba >= 0.5)
+        confidence = raw_proba
 
     explanation = sorted(
         [
@@ -58,6 +60,6 @@ def run_prediction(disease_name: str, input_features: dict) -> dict:
 
     return {
         "prediction": prediction,
-        "confidence": float(proba),
+        "confidence": float(confidence),
         "explanation": explanation,
     }

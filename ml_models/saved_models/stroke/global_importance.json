@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "age",
+    "importance": 0.3633378354968821
+  },
+  {
+    "feature": "avg_glucose_level",
+    "importance": 0.13527576513951264
+  },
+  {
+    "feature": "bmi",
+    "importance": 0.11431385273269887
+  },
+  {
+    "feature": "ever_married_Yes",
+    "importance": 0.08489322870909537
+  },
+  {
+    "feature": "hypertension",
+    "importance": 0.05323557737398826
+  },
+  {
+    "feature": "Residence_type_Urban",
+    "importance": 0.05215476504506748
+  },
+  {
+    "feature": "gender_Male",
+    "importance": 0.047040366680886424
+  },
+  {
+    "feature": "smoking_status_never smoked",
+    "importance": 0.03444022561258636
+  },
+  {
+    "feature": "work_type_Private",
+    "importance": 0.03118080835026458
+  },
+  {
+    "feature": "smoking_status_formerly smoked",
+    "importance": 0.01947138514740123
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "hemo",
+    "importance": 0.20683172450508394
+  },
+  {
+    "feature": "pcv",
+    "importance": 0.1710429967005098
+  },
+  {
+    "feature": "sc",
+    "importance": 0.15422413837218443
+  },
+  {
+    "feature": "sg",
+    "importance": 0.12349778840341126
+  },
+  {
+    "feature": "rbcc",
+    "importance": 0.08150778287149747
+  },
+  {
+    "feature": "al",
+    "importance": 0.06934259706073334
+  },
+  {
+    "feature": "htn_yes",
+    "importance": 0.060307422126821254
+  },
+  {
+    "feature": "dm_yes",
+    "importance": 0.028168469145229105
+  },
+  {
+    "feature": "dm_no",
+    "importance": 0.023381880289243137
+  },
+  {
+    "feature": "bu",
+    "importance": 0.020205480892452013
+  }
+]

@@ -24,6 +24,29 @@ def list_patients(current_user: User = Depends(require_doctor), db: Session = De
         {"id": p.id, "full_name": p.full_name, "date_of_birth": p.date_of_birth}
         for p in patients
     ]
+@router.get("/predictions/{prediction_id}")
+def get_prediction_detail(
+    prediction_id: int,
+    current_user: User = Depends(require_doctor),
+    db: Session = Depends(get_db),
+):
+    prediction = db.query(Prediction).filter(Prediction.id == prediction_id).first()
+    if not prediction:
+        raise HTTPException(status_code=404, detail="Prediction not found")
+
+    patient = db.query(Patient).filter(Patient.id == prediction.patient_id).first()
+    explanation = db.query(Explanation).filter(Explanation.prediction_id == prediction.id).first()
+
+    return {
+        "id": prediction.id,
+        "patient_name": patient.full_name if patient else "Unknown",
+        "predicted_disease": prediction.predicted_disease,
+        "confidence_score": prediction.confidence_score,
+        "created_at": prediction.created_at,
+        "input_features": prediction.input_features,
+        "explanation": explanation.shap_values if explanation else [],
+        "prediction": 1 if float(prediction.confidence_score) >= 0.5 else 0,
+    }
 
 
 @router.get("/patients/{patient_id}/predictions")

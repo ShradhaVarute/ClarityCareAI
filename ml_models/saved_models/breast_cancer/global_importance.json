@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "worst perimeter",
+    "importance": 0.13310023764997225
+  },
+  {
+    "feature": "worst area",
+    "importance": 0.12805191271303082
+  },
+  {
+    "feature": "worst concave points",
+    "importance": 0.10810734174768957
+  },
+  {
+    "feature": "mean concave points",
+    "importance": 0.09441439125880831
+  },
+  {
+    "feature": "worst radius",
+    "importance": 0.09063889139731521
+  },
+  {
+    "feature": "mean radius",
+    "importance": 0.05866225824281181
+  },
+  {
+    "feature": "mean perimeter",
+    "importance": 0.05524182553576135
+  },
+  {
+    "feature": "mean area",
+    "importance": 0.04993761882368043
+  },
+  {
+    "feature": "mean concavity",
+    "importance": 0.046206958685895416
+  },
+  {
+    "feature": "worst concavity",
+    "importance": 0.035357137857065034
+  }
+]

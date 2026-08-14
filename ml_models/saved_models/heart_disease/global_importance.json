@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "thal",
+    "importance": 0.13514252120921122
+  },
+  {
+    "feature": "cp",
+    "importance": 0.13424724001299695
+  },
+  {
+    "feature": "thalach",
+    "importance": 0.11658902804936487
+  },
+  {
+    "feature": "oldpeak",
+    "importance": 0.10498186697232585
+  },
+  {
+    "feature": "ca",
+    "importance": 0.09614151439882596
+  },
+  {
+    "feature": "chol",
+    "importance": 0.09207825763693223
+  },
+  {
+    "feature": "age",
+    "importance": 0.09066405124781347
+  },
+  {
+    "feature": "trestbps",
+    "importance": 0.07625659338632579
+  },
+  {
+    "feature": "slope",
+    "importance": 0.05382914958054575
+  },
+  {
+    "feature": "exang",
+    "importance": 0.044552201733036714
+  }
+]

@@ -6,6 +6,9 @@ import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import DoctorDashboard from "./pages/DoctorDashboard";
 import AdminDashboard from "./pages/AdminDashboard";
+import PredictionDetail from "./pages/PredictionDetail";
+import DoctorPredictionDetail from "./pages/DoctorPredictionDetail";
+import Insights from "./pages/Insights";
 
 function RoleBasedDashboard() {
   const { user } = useAuth();
@@ -28,6 +31,30 @@ function App() {
             element={
               <ProtectedRoute>
                 <RoleBasedDashboard />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/predictions/:id"
+            element={
+              <ProtectedRoute>
+                <PredictionDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/doctor/predictions/:id"
+            element={
+              <ProtectedRoute>
+                <DoctorPredictionDetail />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/insights"
+            element={
+              <ProtectedRoute>
+                <Insights />
               </ProtectedRoute>
             }
           />

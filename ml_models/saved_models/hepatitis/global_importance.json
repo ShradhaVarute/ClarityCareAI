@@ -1,0 +1,42 @@
+[
+  {
+    "feature": "Protime",
+    "importance": 0.16048338981568697
+  },
+  {
+    "feature": "Bilirubin",
+    "importance": 0.14882032939079945
+  },
+  {
+    "feature": "Alk Phosphate",
+    "importance": 0.11866521202538031
+  },
+  {
+    "feature": "Albumin",
+    "importance": 0.1136878496107191
+  },
+  {
+    "feature": "Sgot",
+    "importance": 0.07485686976176092
+  },
+  {
+    "feature": "Ascites",
+    "importance": 0.06779641123834172
+  },
+  {
+    "feature": "Age",
+    "importance": 0.06689838709245148
+  },
+  {
+    "feature": "Varices",
+    "importance": 0.04302297902693428
+  },
+  {
+    "feature": "Histology",
+    "importance": 0.0425013951501442
+  },
+  {
+    "feature": "Spleen Palpable",
+    "importance": 0.02534234311472815
+  }
+]
