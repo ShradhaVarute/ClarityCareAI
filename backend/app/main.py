@@ -4,6 +4,9 @@ from app.routes import auth, predictions
 from app import models
 from app.routes import auth, predictions, doctor
 from app.routes import auth, predictions, doctor, admin
+import os
+
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 
 app = FastAPI(
     title="Clarity Care AI",
@@ -13,7 +16,7 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
