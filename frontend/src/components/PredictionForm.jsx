@@ -4,6 +4,12 @@ function PredictionForm({ fields, onSubmit }) {
   const [values, setValues] = useState(
     Object.fromEntries(fields.map((f) => [f.name, ""]))
   );
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    setValues(Object.fromEntries(fields.map((f) => [f.name, ""])));
+    setError("");
+  }, [fields]);
 
   const handleChange = (name, value) => {
     setValues({ ...values, [name]: value });
@@ -11,6 +17,26 @@ function PredictionForm({ fields, onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setError("");
+
+    for (const field of fields) {
+      const raw = values[field.name];
+      const num = Number(raw);
+
+      if (raw === "" || Number.isNaN(num)) {
+        setError(`${field.label} must be a valid number.`);
+        return;
+      }
+      if (field.min !== undefined && num < field.min) {
+        setError(`${field.label} must be at least ${field.min}.`);
+        return;
+      }
+      if (field.max !== undefined && num > field.max) {
+        setError(`${field.label} must be no more than ${field.max}.`);
+        return;
+      }
+    }
+
     const numericValues = Object.fromEntries(
       Object.entries(values).map(([k, v]) => [k, Number(v)])
     );
@@ -25,6 +51,8 @@ function PredictionForm({ fields, onSubmit }) {
           <input
             type={field.type}
             step={field.step || "1"}
+            min={field.min}
+            max={field.max}
             value={values[field.name]}
             onChange={(e) => handleChange(field.name, e.target.value)}
             className="w-full border rounded px-3 py-2"
@@ -32,6 +60,11 @@ function PredictionForm({ fields, onSubmit }) {
           />
         </div>
       ))}
+      {error && (
+        <p className="col-span-2 text-coral text-sm bg-coral/10 px-3 py-2 rounded">
+          {error}
+        </p>
+      )}
       <button
         type="submit"
         className="col-span-2 bg-slate-800 text-white rounded py-2 mt-2"

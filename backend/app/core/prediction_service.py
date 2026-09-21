@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from functools import lru_cache
 from app.core.model_registry import get_model_paths
+from app.core.feature_bounds import FEATURE_BOUNDS
 
 
 @lru_cache(maxsize=None)
@@ -24,6 +25,21 @@ def run_prediction(disease_name: str, input_features: dict) -> dict:
     missing = [f for f in feature_names if f not in input_features]
     if missing:
         raise ValueError(f"Missing required features: {missing}")
+
+    bounds = FEATURE_BOUNDS.get(disease_name, {})
+    out_of_range = []
+    for feature, (low, high) in bounds.items():
+        value = input_features.get(feature)
+        if value is not None:
+            try:
+                numeric_value = float(value)
+            except (TypeError, ValueError):
+                out_of_range.append(f"{feature} must be a number (got {value!r})")
+                continue
+            if not (low <= numeric_value <= high):
+                out_of_range.append(f"{feature} must be between {low} and {high} (got {value})")
+    if out_of_range:
+        raise ValueError("Invalid input values: " + "; ".join(out_of_range))
 
     ordered_values = pd.DataFrame([[input_features[f] for f in feature_names]], columns=feature_names)
     scaled = artifacts["scaler"].transform(ordered_values)
