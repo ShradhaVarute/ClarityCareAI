@@ -11,18 +11,83 @@ function StatCard({ label, value }) {
   );
 }
 
+function CreateStaffForm({ onCreated }) {
+  const [formData, setFormData] = useState({ email: "", password: "", full_name: "", role: "doctor" });
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    try {
+      await apiClient.post("/admin/users", formData);
+      setSuccess(`${formData.role === "admin" ? "Admin" : "Doctor"} account created for ${formData.email}`);
+      setFormData({ email: "", password: "", full_name: "", role: "doctor" });
+      onCreated();
+    } catch (err) {
+      setError(err.response?.data?.detail || "Failed to create account");
+    }
+  };
+
+  const inputClass = "w-full border border-stone/30 rounded-md px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-teal";
+
+  return (
+    <div className="bg-white border border-stone/15 rounded-lg p-6 mb-6">
+      <h2 className="font-display text-lg text-ink mb-1">Create Staff Account</h2>
+      <p className="text-xs text-stone mb-4">
+        Doctor and admin accounts can only be created here — never through public registration.
+      </p>
+
+      {error && <p className="text-coral text-sm mb-3 bg-coral/10 px-3 py-2 rounded">{error}</p>}
+      {success && <p className="text-teal text-sm mb-3 bg-teal/10 px-3 py-2 rounded">{success}</p>}
+
+      <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-4">
+        <div>
+          <label className="block text-xs font-medium text-stone uppercase tracking-wide mb-1">Full Name</label>
+          <input name="full_name" value={formData.full_name} onChange={handleChange} className={inputClass} required />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-stone uppercase tracking-wide mb-1">Email</label>
+          <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClass} required />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-stone uppercase tracking-wide mb-1">Password</label>
+          <input type="password" name="password" value={formData.password} onChange={handleChange} className={inputClass} required minLength={8} />
+        </div>
+        <div>
+          <label className="block text-xs font-medium text-stone uppercase tracking-wide mb-1">Role</label>
+          <select name="role" value={formData.role} onChange={handleChange} className={inputClass}>
+            <option value="doctor">Doctor</option>
+            <option value="admin">Admin</option>
+          </select>
+        </div>
+        <button type="submit" className="col-span-2 bg-deep text-paper rounded-md py-2 text-sm font-medium hover:bg-ink transition-colors">
+          Create Account
+        </button>
+      </form>
+    </div>
+  );
+}
+
 function AdminDashboard() {
   const [stats, setStats] = useState(null);
   const [users, setUsers] = useState([]);
   const [error, setError] = useState("");
 
-  useEffect(() => {
+  const loadData = () => {
     Promise.all([apiClient.get("/admin/stats"), apiClient.get("/admin/users")])
       .then(([statsRes, usersRes]) => {
         setStats(statsRes.data);
         setUsers(usersRes.data);
       })
       .catch((err) => setError(err.response?.data?.detail || "Failed to load admin data"));
+  };
+
+  useEffect(() => {
+    loadData();
   }, []);
 
   return (
@@ -51,6 +116,8 @@ function AdminDashboard() {
           </div>
         </>
       )}
+
+      <CreateStaffForm onCreated={loadData} />
 
       <div className="bg-white border border-stone/15 rounded-lg p-6">
         <h2 className="font-display text-lg text-ink mb-4">All Users</h2>

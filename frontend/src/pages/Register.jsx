@@ -5,7 +5,7 @@ import { useAuth } from "../context/AuthContext";
 
 function Register() {
   const [formData, setFormData] = useState({
-    email: "", password: "", full_name: "", role: "patient",
+    email: "", password: "", full_name: "",
   });
   const [error, setError] = useState("");
   const navigate = useNavigate();
@@ -40,7 +40,8 @@ function Register() {
           </h1>
         </div>
         <p className="text-sm text-stone max-w-sm">
-          Register as a patient to run assessments, or as a doctor to review patient history.
+          Register as a patient to start running assessments. Doctor and admin
+          accounts are created by an administrator.
         </p>
       </div>
 
@@ -60,13 +61,7 @@ function Register() {
           <input type="email" name="email" value={formData.email} onChange={handleChange} className={inputClass} required />
 
           <label className={labelClass}>Password</label>
-          <input type="password" name="password" value={formData.password} onChange={handleChange} className={inputClass} required />
-
-          <label className={labelClass}>Role</label>
-          <select name="role" value={formData.role} onChange={handleChange} className={inputClass}>
-            <option value="patient">Patient</option>
-            <option value="doctor">Doctor</option>
-          </select>
+          <input type="password" name="password" value={formData.password} onChange={handleChange} className={inputClass} required minLength={8} />
 
           <button type="submit" className="w-full bg-deep text-paper rounded-md py-2.5 text-sm font-medium hover:bg-ink transition-colors mt-2">
             Create account
