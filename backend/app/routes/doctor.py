@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+import logging
 
 from app.core.database import get_db
 from app.core.deps import get_current_user
@@ -7,6 +8,8 @@ from app.models.user import User
 from app.models.patient import Patient
 from app.models.prediction import Prediction
 from app.models.explanation import Explanation
+
+logger = logging.getLogger("audit")
 
 router = APIRouter(prefix="/doctor", tags=["doctor"])
 
@@ -24,6 +27,8 @@ def list_patients(current_user: User = Depends(require_doctor), db: Session = De
         {"id": p.id, "full_name": p.full_name, "date_of_birth": p.date_of_birth}
         for p in patients
     ]
+
+
 @router.get("/predictions/{prediction_id}")
 def get_prediction_detail(
     prediction_id: int,
@@ -36,6 +41,8 @@ def get_prediction_detail(
 
     patient = db.query(Patient).filter(Patient.id == prediction.patient_id).first()
     explanation = db.query(Explanation).filter(Explanation.prediction_id == prediction.id).first()
+
+    logger.info(f"AUDIT: doctor_id={current_user.id} accessed prediction_id={prediction_id}")
 
     return {
         "id": prediction.id,
@@ -55,6 +62,8 @@ def get_patient_predictions(
     current_user: User = Depends(require_doctor),
     db: Session = Depends(get_db),
 ):
+    logger.info(f"AUDIT: doctor_id={current_user.id} accessed patient_id={patient_id}")
+
     predictions = db.query(Prediction).filter(Prediction.patient_id == patient_id).all()
 
     results = []

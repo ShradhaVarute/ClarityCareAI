@@ -1,18 +1,26 @@
-from fastapi import FastAPI
-from fastapi.middleware.cors import CORSMiddleware
-from app.routes import auth, predictions
-from app import models
-from app.routes import auth, predictions, doctor
-from app.routes import auth, predictions, doctor, admin
 import os
 
-allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from slowapi.errors import RateLimitExceeded
+from slowapi import _rate_limit_exceeded_handler
+
+from app.routes import auth, predictions, doctor, admin
+from app.routes.auth import limiter
+from app import models
 
 app = FastAPI(
     title="Clarity Care AI",
     description="Explainable Disease Prediction API",
     version="0.1.0",
 )
+
+# Rate limiting (registered on the auth routes, e.g. login)
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
+
+# CORS
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:5173").split(",")
 
 app.add_middleware(
     CORSMiddleware,
@@ -23,10 +31,12 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+# Routers
 app.include_router(auth.router)
 app.include_router(predictions.router)
 app.include_router(doctor.router)
 app.include_router(admin.router)
+
 
 @app.get("/health")
 def health_check():
