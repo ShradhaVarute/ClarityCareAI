@@ -15,11 +15,10 @@ def test_heart_disease_prediction(client):
         "/predictions/heart_disease",
         headers={"Authorization": f"Bearer {token}"},
         json={
-            "patient_id": 1,
             "features": {
                 "age": 55, "sex": 1, "cp": 3, "trestbps": 130, "chol": 250,
                 "fbs": 0, "restecg": 0, "thalach": 150, "exang": 0,
-                "oldpeak": 1.5, "slope": 1, "ca": 0, "thal": 2,
+                "oldpeak": 1.5, "slope": 1, "ca": 0, "thal": 3,
             },
         },
     )

@@ -88,6 +88,13 @@ def create_prediction(
     current_user: User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+    if current_user.role != "patient":
+        raise HTTPException(status_code=403, detail="Patient access only")
+
+    patient = db.query(Patient).filter(Patient.user_id == current_user.id).first()
+    if not patient:
+        raise HTTPException(status_code=404, detail="Patient record not found")
+
     if disease_name not in SUPPORTED_DISEASES:
         raise HTTPException(status_code=404, detail=f"Unknown disease: {disease_name}")
 
@@ -97,7 +104,7 @@ def create_prediction(
         raise HTTPException(status_code=422, detail=str(e))
 
     db_prediction = Prediction(
-        patient_id=payload.patient_id,
+        patient_id=patient.id,
         input_features=payload.features,
         predicted_disease=disease_name,
         confidence_score=str(result["confidence"]),

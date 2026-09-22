@@ -3,7 +3,6 @@ from typing import Any
 
 
 class PredictionRequest(BaseModel):
-    patient_id: int
     features: dict[str, Any]
 
 

@@ -4,9 +4,11 @@ from sqlalchemy import func
 
 from app.core.database import get_db
 from app.core.deps import get_current_user
+from app.core.security import hash_password, create_access_token
 from app.models.user import User
 from app.models.patient import Patient
 from app.models.prediction import Prediction
+from app.schemas.auth import StaffCreate, Token
 
 router = APIRouter(prefix="/admin", tags=["admin"])
 
@@ -46,3 +48,28 @@ def list_users(current_user: User = Depends(require_admin), db: Session = Depend
         {"id": u.id, "email": u.email, "role": u.role, "created_at": u.created_at}
         for u in users
     ]
+
+
+@router.post("/users", response_model=Token)
+def create_staff_user(
+    payload: StaffCreate,
+    current_user: User = Depends(require_admin),
+    db: Session = Depends(get_db),
+):
+    """Create a doctor or admin account. Only an existing admin can do this —
+    these roles are never self-assignable via public registration."""
+    existing = db.query(User).filter(User.email == payload.email).first()
+    if existing:
+        raise HTTPException(status_code=400, detail="Email already registered")
+
+    new_user = User(
+        email=payload.email,
+        hashed_password=hash_password(payload.password),
+        role=payload.role,
+    )
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+
+    token = create_access_token({"sub": str(new_user.id), "role": new_user.role})
+    return Token(access_token=token)

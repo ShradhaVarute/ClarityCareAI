@@ -15,23 +15,26 @@ limiter = Limiter(key_func=get_remote_address)
 
 
 @router.post("/register", response_model=Token)
-def register(payload: UserRegister, db: Session = Depends(get_db)):
+@limiter.limit("10/hour")
+def register(request: Request, payload: UserRegister, db: Session = Depends(get_db)):
     existing = db.query(User).filter(User.email == payload.email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
 
+    # Public self-registration always creates a patient account. Doctor and
+    # admin accounts can only be created by an existing admin (see
+    # POST /admin/users) — they are never chosen by the registrant.
     new_user = User(
         email=payload.email,
         hashed_password=hash_password(payload.password),
-        role=payload.role,
+        role="patient",
     )
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
 
-    if payload.role == "patient":
-        db.add(Patient(user_id=new_user.id, full_name=payload.full_name))
-        db.commit()
+    db.add(Patient(user_id=new_user.id, full_name=payload.full_name))
+    db.commit()
 
     token = create_access_token({"sub": str(new_user.id), "role": new_user.role})
     return Token(access_token=token)
