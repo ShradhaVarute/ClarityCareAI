@@ -1,42 +1,42 @@
 [
   {
     "feature": "hemo",
-    "importance": 0.20683172450508394
+    "importance": 0.09324989118540408
   },
   {
     "feature": "pcv",
-    "importance": 0.1710429967005098
+    "importance": 0.0843159454086711
   },
   {
     "feature": "sc",
-    "importance": 0.15422413837218443
+    "importance": 0.07336143102219941
   },
   {
     "feature": "sg",
-    "importance": 0.12349778840341126
-  },
-  {
-    "feature": "rbcc",
-    "importance": 0.08150778287149747
+    "importance": 0.05999003781456898
   },
   {
     "feature": "al",
-    "importance": 0.06934259706073334
+    "importance": 0.03896453797501547
+  },
+  {
+    "feature": "rbcc",
+    "importance": 0.03830163460702678
   },
   {
     "feature": "htn_yes",
-    "importance": 0.060307422126821254
+    "importance": 0.03251578111590389
   },
   {
     "feature": "dm_yes",
-    "importance": 0.028168469145229105
-  },
-  {
-    "feature": "dm_no",
-    "importance": 0.023381880289243137
+    "importance": 0.015415896100692803
   },
   {
     "feature": "bu",
-    "importance": 0.020205480892452013
+    "importance": 0.009868672567951734
+  },
+  {
+    "feature": "dm_no",
+    "importance": 0.009441966154624169
   }
 ]

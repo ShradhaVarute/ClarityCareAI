@@ -76,7 +76,7 @@ function Dashboard() {
             {loading && <p className="text-stone text-sm mt-4">Running prediction…</p>}
           </div>
 
-          {result && <ExplanationDisplay result={result} diseaseName={selectedDisease} />}
+          {result && <ExplanationDisplay result={result} diseaseName={selectedDisease} />} 
         </div>
 
         <div className="bg-white border border-stone/15 rounded-lg p-6 h-fit">

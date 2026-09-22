@@ -1,42 +1,42 @@
 [
   {
     "feature": "Protime",
-    "importance": 0.16048338981568697
+    "importance": 0.057175760210219306
   },
   {
     "feature": "Bilirubin",
-    "importance": 0.14882032939079945
-  },
-  {
-    "feature": "Alk Phosphate",
-    "importance": 0.11866521202538031
+    "importance": 0.04429719546678683
   },
   {
     "feature": "Albumin",
-    "importance": 0.1136878496107191
-  },
-  {
-    "feature": "Sgot",
-    "importance": 0.07485686976176092
+    "importance": 0.03355481861593187
   },
   {
     "feature": "Ascites",
-    "importance": 0.06779641123834172
-  },
-  {
-    "feature": "Age",
-    "importance": 0.06689838709245148
-  },
-  {
-    "feature": "Varices",
-    "importance": 0.04302297902693428
+    "importance": 0.026898235648890885
   },
   {
     "feature": "Histology",
-    "importance": 0.0425013951501442
+    "importance": 0.0241364790009427
   },
   {
-    "feature": "Spleen Palpable",
-    "importance": 0.02534234311472815
+    "feature": "Varices",
+    "importance": 0.018805819827695552
+  },
+  {
+    "feature": "Alk Phosphate",
+    "importance": 0.018039732840760755
+  },
+  {
+    "feature": "Age",
+    "importance": 0.01455516323242928
+  },
+  {
+    "feature": "Sgot",
+    "importance": 0.013354618168442084
+  },
+  {
+    "feature": "Spiders",
+    "importance": 0.011401017052026839
   }
 ]

@@ -1,42 +1,42 @@
 [
   {
     "feature": "Alkphos",
-    "importance": 0.1493408740771776
-  },
-  {
-    "feature": "Sgot",
-    "importance": 0.13787628462325904
+    "importance": 0.05605926931270723
   },
   {
     "feature": "Age",
-    "importance": 0.13688424738766009
+    "importance": 0.05207582006194014
   },
   {
-    "feature": "Sgpt",
-    "importance": 0.12028874938855572
-  },
-  {
-    "feature": "TB",
-    "importance": 0.09624247100419597
-  },
-  {
-    "feature": "ALB",
-    "importance": 0.0951301110596271
-  },
-  {
-    "feature": "TP",
-    "importance": 0.0870696029615983
-  },
-  {
-    "feature": "A/G Ratio",
-    "importance": 0.08003893316407486
+    "feature": "Sgot",
+    "importance": 0.04628587014220733
   },
   {
     "feature": "DB",
-    "importance": 0.07800732677403589
+    "importance": 0.04601790396235817
+  },
+  {
+    "feature": "TB",
+    "importance": 0.042096863464341515
+  },
+  {
+    "feature": "Sgpt",
+    "importance": 0.0382040641464009
+  },
+  {
+    "feature": "ALB",
+    "importance": 0.023532689957006286
+  },
+  {
+    "feature": "TP",
+    "importance": 0.022755955530516892
+  },
+  {
+    "feature": "A/G Ratio",
+    "importance": 0.018916688226193606
   },
   {
     "feature": "Gender_Male",
-    "importance": 0.019121399559815455
+    "importance": 0.007000134112506261
   }
 ]

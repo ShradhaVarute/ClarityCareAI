@@ -1,42 +1,42 @@
 [
   {
-    "feature": "worst perimeter",
-    "importance": 0.13310023764997225
+    "feature": "worst area",
+    "importance": 0.06358841637979219
   },
   {
-    "feature": "worst area",
-    "importance": 0.12805191271303082
+    "feature": "worst perimeter",
+    "importance": 0.06334867945661658
   },
   {
     "feature": "worst concave points",
-    "importance": 0.10810734174768957
-  },
-  {
-    "feature": "mean concave points",
-    "importance": 0.09441439125880831
+    "importance": 0.05606802029344055
   },
   {
     "feature": "worst radius",
-    "importance": 0.09063889139731521
+    "importance": 0.0476661916080643
   },
   {
-    "feature": "mean radius",
-    "importance": 0.05866225824281181
-  },
-  {
-    "feature": "mean perimeter",
-    "importance": 0.05524182553576135
-  },
-  {
-    "feature": "mean area",
-    "importance": 0.04993761882368043
+    "feature": "mean concave points",
+    "importance": 0.04232062620149177
   },
   {
     "feature": "mean concavity",
-    "importance": 0.046206958685895416
+    "importance": 0.02497500557002549
+  },
+  {
+    "feature": "mean area",
+    "importance": 0.023952456820322543
+  },
+  {
+    "feature": "mean radius",
+    "importance": 0.02267271496185911
+  },
+  {
+    "feature": "area error",
+    "importance": 0.022538558043647995
   },
   {
     "feature": "worst concavity",
-    "importance": 0.035357137857065034
+    "importance": 0.022182980638954197
   }
 ]

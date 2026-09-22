@@ -1,42 +1,42 @@
 [
   {
     "feature": "TSH",
-    "importance": 0.5595774506768312
+    "importance": 0.11257254491268466
   },
   {
     "feature": "FTI",
-    "importance": 0.126679991681502
+    "importance": 0.01863104078227756
   },
   {
     "feature": "TT4",
-    "importance": 0.11763482004179755
+    "importance": 0.01603468729582795
   },
   {
     "feature": "on_thyroxine_t",
-    "importance": 0.048503175632288925
+    "importance": 0.00895308466122535
   },
   {
     "feature": "T3",
-    "importance": 0.04458751552772752
+    "importance": 0.008566794918212071
   },
   {
     "feature": "T4U",
-    "importance": 0.0330781975255582
+    "importance": 0.0030899190073239895
   },
   {
     "feature": "age",
-    "importance": 0.027260712389569782
+    "importance": 0.002620772293365048
   },
   {
-    "feature": "thyroid_surgery_t",
-    "importance": 0.010370307010524878
+    "feature": "referral_source_SVHC",
+    "importance": 0.002588928419856477
   },
   {
     "feature": "sex_M",
-    "importance": 0.005901369569456455
+    "importance": 0.0018746611376172651
   },
   {
-    "feature": "query_hypothyroid_t",
-    "importance": 0.005091032218605332
+    "feature": "thyroid_surgery_t",
+    "importance": 0.001790678409053012
   }
 ]

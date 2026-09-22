@@ -1,42 +1,42 @@
 [
   {
     "feature": "thal",
-    "importance": 0.13514252120921122
+    "importance": 0.1102321522876647
   },
   {
     "feature": "cp",
-    "importance": 0.13424724001299695
-  },
-  {
-    "feature": "thalach",
-    "importance": 0.11658902804936487
-  },
-  {
-    "feature": "oldpeak",
-    "importance": 0.10498186697232585
+    "importance": 0.0990420507048247
   },
   {
     "feature": "ca",
-    "importance": 0.09614151439882596
+    "importance": 0.08084756722113047
   },
   {
-    "feature": "chol",
-    "importance": 0.09207825763693223
-  },
-  {
-    "feature": "age",
-    "importance": 0.09066405124781347
-  },
-  {
-    "feature": "trestbps",
-    "importance": 0.07625659338632579
+    "feature": "oldpeak",
+    "importance": 0.05320400233401792
   },
   {
     "feature": "slope",
-    "importance": 0.05382914958054575
+    "importance": 0.04405883759010635
+  },
+  {
+    "feature": "thalach",
+    "importance": 0.04180333785903885
   },
   {
     "feature": "exang",
-    "importance": 0.044552201733036714
+    "importance": 0.03806557076892153
+  },
+  {
+    "feature": "age",
+    "importance": 0.030567721680376744
+  },
+  {
+    "feature": "chol",
+    "importance": 0.029683537577051777
+  },
+  {
+    "feature": "sex",
+    "importance": 0.024825847564295858
   }
 ]

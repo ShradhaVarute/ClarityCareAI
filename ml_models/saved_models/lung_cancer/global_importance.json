@@ -1,42 +1,42 @@
 [
   {
-    "feature": "AGE",
-    "importance": 0.20344370895019254
-  },
-  {
     "feature": "ALLERGY _YES",
-    "importance": 0.08409664194708087
+    "importance": 0.05149795226032146
   },
   {
     "feature": "ALCOHOL CONSUMING_YES",
-    "importance": 0.08318286825807267
+    "importance": 0.04954941720329751
   },
   {
     "feature": "PEER_PRESSURE_YES",
-    "importance": 0.07975978346338909
-  },
-  {
-    "feature": "YELLOW_FINGERS_YES",
-    "importance": 0.06287804744558724
-  },
-  {
-    "feature": "FATIGUE _YES",
-    "importance": 0.06221156687188317
+    "importance": 0.03505456500374902
   },
   {
     "feature": "CHRONIC DISEASE_YES",
-    "importance": 0.055996257212509476
+    "importance": 0.02987566522032699
   },
   {
-    "feature": "WHEEZING_YES",
-    "importance": 0.05424736130424198
+    "feature": "FATIGUE _YES",
+    "importance": 0.02865151635869453
   },
   {
-    "feature": "ANXIETY_YES",
-    "importance": 0.048876250340401
+    "feature": "SWALLOWING DIFFICULTY_YES",
+    "importance": 0.027356279277465093
+  },
+  {
+    "feature": "YELLOW_FINGERS_YES",
+    "importance": 0.02568811370448519
   },
   {
     "feature": "COUGHING_YES",
-    "importance": 0.047975756318850815
+    "importance": 0.02489261817601421
+  },
+  {
+    "feature": "WHEEZING_YES",
+    "importance": 0.024089045900732405
+  },
+  {
+    "feature": "AGE",
+    "importance": 0.01720569539507628
   }
 ]
