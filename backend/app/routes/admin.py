@@ -58,12 +58,13 @@ def create_staff_user(
 ):
     """Create a doctor or admin account. Only an existing admin can do this —
     these roles are never self-assignable via public registration."""
-    existing = db.query(User).filter(User.email == payload.email).first()
+    email = payload.email.lower()
+    existing = db.query(User).filter(User.email == email).first()
     if existing:
         raise HTTPException(status_code=400, detail="Email already registered")
 
     new_user = User(
-        email=payload.email,
+        email=email,
         hashed_password=hash_password(payload.password),
         role=payload.role,
     )
