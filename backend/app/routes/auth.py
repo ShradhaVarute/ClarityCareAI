@@ -1,3 +1,5 @@
+import logging
+
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from slowapi import Limiter
@@ -9,6 +11,8 @@ from app.models.user import User
 from app.models.patient import Patient
 from app.schemas.auth import UserRegister, UserLogin, Token
 from app.core.deps import get_current_user
+
+logger = logging.getLogger("uvicorn.error")
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 limiter = Limiter(key_func=get_remote_address)
@@ -41,6 +45,12 @@ def register(request: Request, payload: UserRegister, db: Session = Depends(get_
 @router.post("/login", response_model=Token)
 @limiter.limit("5/minute")
 def login(request: Request, payload: UserLogin, db: Session = Depends(get_db)):
+    # TEMPORARY diagnostic: remove after the rate-limit investigation
+    logger.info(
+        f"LOGIN DIAG client={request.client.host} "
+        f"xff={request.headers.get('x-forwarded-for')}"
+    )
+
     email = payload.email.lower()
     user = db.query(User).filter(User.email == email).first()
     if not user or not verify_password(payload.password, user.hashed_password):
