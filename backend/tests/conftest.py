@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 os.environ.setdefault(
-    "DATABASE_URL", "postgresql://postgres:postgres@localhost:5432/claritycare_test_db"
+    "DATABASE_URL", "postgresql://postgres:Shrinika%40230604@localhost:5432/claritycare_test_db"
 )
 
 from app.main import app

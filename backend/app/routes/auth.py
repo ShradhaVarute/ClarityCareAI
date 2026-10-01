@@ -3,7 +3,6 @@ import logging
 from fastapi import APIRouter, Depends, HTTPException, Request
 from sqlalchemy.orm import Session
 from slowapi import Limiter
-from slowapi.util import get_remote_address
 
 from app.core.database import get_db
 from app.core.security import hash_password, verify_password, create_access_token
@@ -15,7 +14,25 @@ from app.core.deps import get_current_user
 logger = logging.getLogger("uvicorn.error")
 
 router = APIRouter(prefix="/auth", tags=["auth"])
-limiter = Limiter(key_func=get_remote_address)
+
+
+def get_client_ip(request: Request) -> str:
+    """Real client IP, for rate limiting behind Render's proxy chain.
+
+    On Render, X-Forwarded-For looks like: "<client>, <cloudflare edge>, <render proxy>".
+    The left side of the header can be forged by a client, so we count from the
+    right (the entries added by the platform) instead of trusting the first one.
+    Without that chain (local dev, tests) we fall back to the direct peer.
+    """
+    forwarded = request.headers.get("x-forwarded-for")
+    if forwarded:
+        hops = [h.strip() for h in forwarded.split(",") if h.strip()]
+        if len(hops) >= 3:
+            return hops[-3]
+    return request.client.host if request.client else "unknown"
+
+
+limiter = Limiter(key_func=get_client_ip)
 
 
 @router.post("/register", response_model=Token)
@@ -45,9 +62,9 @@ def register(request: Request, payload: UserRegister, db: Session = Depends(get_
 @router.post("/login", response_model=Token)
 @limiter.limit("5/minute")
 def login(request: Request, payload: UserLogin, db: Session = Depends(get_db)):
-    # TEMPORARY diagnostic: remove after the rate-limit investigation
+    # TEMPORARY diagnostic: remove after verifying the fix
     logger.info(
-        f"LOGIN DIAG client={request.client.host} "
+        f"LOGIN DIAG key={get_client_ip(request)} "
         f"xff={request.headers.get('x-forwarded-for')}"
     )
 
