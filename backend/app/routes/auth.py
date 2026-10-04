@@ -19,15 +19,16 @@ router = APIRouter(prefix="/auth", tags=["auth"])
 def get_client_ip(request: Request) -> str:
     """Real client IP, for rate limiting behind Render's proxy chain.
 
-    On Render, X-Forwarded-For looks like: "<client>, <cloudflare edge>, <render proxy>".
-    The left side of the header can be forged by a client, so we count from the
-    right (the entries added by the platform) instead of trusting the first one.
-    Without that chain (local dev, tests) we fall back to the direct peer.
+    Render appends exactly two hops of its own after whatever a client sends:
+    a Cloudflare edge address, then Render's internal proxy address. Those two
+    are controlled by the platform and can be trusted; everything a client
+    puts before them is attacker-editable, so we always drop exactly the last
+    two entries and take what's left over as the real client IP.
     """
     forwarded = request.headers.get("x-forwarded-for")
     if forwarded:
         hops = [h.strip() for h in forwarded.split(",") if h.strip()]
-        if len(hops) >= 3:
+        if len(hops) > 2:
             return hops[-3]
     return request.client.host if request.client else "unknown"
 
